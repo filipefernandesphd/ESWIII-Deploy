@@ -39,8 +39,11 @@ jobs:
       - name: Instalar dependências dentro do container
         run: docker compose exec -T app npm install
 
-      - name: Executar testes dentro do container
-        run: docker compose exec -T app npm test
+      - name: Executar testes unitários dentro do container
+        run: docker compose exec -T app npm run test:unit
+
+      - name: Executar testes de aceitação dentro do container
+        run: docker compose exec -T app npx start-server-and-test start http://localhost:3000 cucumber-js
 
       - name: Encerrar containers
         if: always()
