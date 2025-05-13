@@ -20,7 +20,7 @@ jobs:
           node-version: 18
 
       - name: Subir containers da aplicação
-        run: docker-compose up -d
+        run: docker compose up -d
 
       - name: Aguardar o servidor estar disponível
         uses: jakejarvis/wait-action@v0.1.0
