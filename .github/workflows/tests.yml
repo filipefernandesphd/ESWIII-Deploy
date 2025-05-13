@@ -22,11 +22,16 @@ jobs:
       - name: Subir containers da aplicação
         run: docker compose up -d
 
-      - name: Aguardar o servidor subir (porta 3311)
-        uses: softprops/wait-for-it@v1
-        with:
-          url: http://localhost:3311
-          timeout: 30
+      - name: Aguardar o servidor responder na porta 3311
+        run: |
+          for i in {1..30}; do
+            echo "Tentando conectar em http://localhost:3311 (tentativa $i)..."
+            if curl --silent --fail http://localhost:3311 > /dev/null; then
+              echo "Servidor disponível!"
+              break
+            fi
+            sleep 1
+          done
 
       - name: Instalar dependências
         run: npm install
