@@ -96,4 +96,5 @@ Para executar todos os testes, adicione isto ao `package.json`:
         ```
     3. Para funcionar corretamente o teste de aceitação no GitHub Actions, instale `npm i -D start-server-and-test`.
     4. Atualize `"test:acceptance": "cucumber-js"` para `"test:acceptance": "start-server-and-test start http://localhost:3011 cucumber-js"`.
+    5. Atualize o `tests.yml` para que o teste de aceitação execute com sucesso no GitHub Actions. 
 4. Atualize o repostiório e verifique o status em GitHub Actions

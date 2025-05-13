@@ -19,8 +19,21 @@ jobs:
         with:
           node-version: 18
 
+      - name: Subir containers da aplicação
+        run: docker-compose up -d
+
+      - name: Aguardar o servidor estar disponível
+        uses: jakejarvis/wait-action@v0.1.0
+        with:
+          url: http://localhost:3000
+          timeout: 30
+
       - name: Instalar dependências
         run: npm install
 
       - name: Executar testes
         run: npm test
+
+      - name: Encerrar containers
+        if: always()
+        run: docker-compose down
