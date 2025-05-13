@@ -10,7 +10,5 @@ services:
       - /app/node_modules    # evita conflito com node_modules local
     ports:
       - "3311:3000"
-    command: >
-      sh -c "npm install && npm run dev"
     environment:
       - NODE_ENV=development
