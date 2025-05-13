@@ -1,6 +1,6 @@
 FROM node:18
 
-# Instalar bibliotecas necessárias para o Chromium (Puppeteer)
+# Instala as dependências do sistema para o Chromium (Puppeteer)
 RUN apt-get update && apt-get install -y \
   wget \
   ca-certificates \
@@ -19,20 +19,23 @@ RUN apt-get update && apt-get install -y \
   libxdamage1 \
   libxrandr2 \
   xdg-utils \
+  libgbm1 \
+  libxshmfence1 \
+  libgtk-3-0 \
   --no-install-recommends \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Criar diretório de trabalho
+# Cria diretório de trabalho
 WORKDIR /app
 
-# Copiar arquivos para o container
+# Copia os arquivos do projeto
 COPY . .
 
-# Instalar dependências Node.js
+# Instala dependências Node.js
 RUN npm install
 
-# Expor a porta padrão
+# Expõe a porta interna da aplicação
 EXPOSE 3000
 
-# Comando padrão (pode ser sobrescrito pelo docker-compose)
+# Comando padrão
 CMD ["npm", "start"]
