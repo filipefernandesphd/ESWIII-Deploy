@@ -22,8 +22,8 @@ jobs:
       - name: Subir containers da aplicação
         run: docker compose up -d
 
-      - name: Aguardar o servidor estar disponível
-        uses: jakejarvis/wait-action@v0.1.0
+      - name: Aguardar o servidor subir (porta 3311)
+        uses: softprops/wait-for-it@v1
         with:
           url: http://localhost:3311
           timeout: 30
